@@ -3,16 +3,26 @@ package core.advanced.trace.template;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public abstract class AbstractTemplate {
+public abstract class AbstractTemplate<T> {
 
-    public void execute() {
-        long startTime = System.currentTimeMillis(); //비즈니스 로직 실행
-        call(); //상속
-        //비즈니스 로직 종료
-        long endTime = System.currentTimeMillis();
-        long resultTime = endTime - startTime;
-        log.info("resultTime={}", resultTime);
+    private final LogTrace trace;
+
+    public AbstractTemplate(LogTrace trace) {
+        this.trace = trace;
     }
 
-    protected abstract void call();
+    public T execute(String message) {
+        TraceStatus status = null;
+        try {
+            status = trace.begin(message); //로직 호출
+            T result = call();
+            trace.end(status);
+            return result;
+        } catch (Exception e) {
+            trace.exception(status, e);
+            throw e;
+        }
+    }
+
+    protected abstract T call();
 }
