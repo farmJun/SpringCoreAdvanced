@@ -1,5 +1,6 @@
 package core.advanced.app.v4;
 
+import core.advanced.trace.AbstractTemplate;
 import core.advanced.trace.TraceStatus;
 import core.advanced.trace.logTrace.LogTrace;
 import lombok.RequiredArgsConstructor;
