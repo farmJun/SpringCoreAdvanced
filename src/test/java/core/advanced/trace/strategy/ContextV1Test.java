@@ -1,5 +1,8 @@
 package core.advanced.trace.strategy;
 
+import core.advanced.trace.strategy.code.Strategy;
+import core.advanced.trace.strategy.code.StrategyLogic1;
+import core.advanced.trace.strategy.code.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +31,15 @@ public class ContextV1Test {
         long endTime = System.currentTimeMillis();
         long resultTime = endTime - startTime;
         log.info("resultTime={}", resultTime);
+    }
+
+    @Test
+    void strategyV1() {
+        Strategy strategyLogic1 = new StrategyLogic1();
+        ContextV1 context1 = new ContextV1(strategyLogic1);
+        context1.execute();
+        Strategy strategyLogic2 = new StrategyLogic2();
+        ContextV1 context2 = new ContextV1(strategyLogic2);
+        context2.execute();
     }
 }
