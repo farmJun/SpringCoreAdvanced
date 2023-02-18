@@ -31,4 +31,11 @@ public class ContextV2Test {
             }
         });
     }
+
+    @Test
+    void strategyV3() {
+        ContextV2 context = new ContextV2();
+        context.execute(() -> log.info("비즈니스 로직1 실행"));
+        context.execute(() -> log.info("비즈니스 로직2 실행"));
+    }
 }
