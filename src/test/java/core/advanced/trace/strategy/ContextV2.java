@@ -1,6 +1,6 @@
 package core.advanced.trace.strategy;
 
-import core.advanced.trace.strategy.code.Strategy;
+import core.advanced.trace.strategy.code.strategy.Strategy;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
